@@ -22,15 +22,26 @@ node {
             sh 'curl http://localhost:8000 || exit 1'
         }
     }
+    
+    stage('Docker Login') {
+                sh "docker login --username  $USERNAME  --password $PASSWORD " 
+            }
+            stage('Docker Push') {
+                if (params.pushLatest) {
+                    println('Pushing the image to latest version!!')
+                    sh "docker tag artemis aiados/artemis:latest"
+                    sh "docker push aiados/artemis:latest"
 
-    stage('Push image') {
+                    } 
+
+    //stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
+        //docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+           // app.push("${env.BUILD_NUMBER}")
+            //app.push("latest")
+        //}
+    //}
 }
