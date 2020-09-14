@@ -29,8 +29,8 @@ node {
             stage('Docker Push') {
                 if (params.pushLatest) {
                     println('Pushing the image to latest version!!')
-                    sh "docker tag artemis aiados/artemis:latest"
-                    sh "docker push aiados/artemis:latest"
+                    sh "docker tag artemis aiados/docker-jenkins:latest"
+                    sh "docker push aiados/docker-jenkins:latest"
 
                     } 
 
