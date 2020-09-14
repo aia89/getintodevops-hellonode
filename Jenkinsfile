@@ -33,6 +33,8 @@ node {
                     sh "docker push aiados/docker-jenkins:latest"
 
                     } 
+            }
+}
 
     //stage('Push image') {
         /* Finally, we'll push the image with two tags:
@@ -44,4 +46,4 @@ node {
             //app.push("latest")
         //}
     //}
-}
+
